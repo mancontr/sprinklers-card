@@ -2,7 +2,15 @@
   "name": "sprinklers-card",
   "version": "0.1.0",
   "description": "Home Assistant card to manage sprinkler systems",
-  "main": "dist/sprinklers-card.js",
+  "keywords": [
+    "home-assistant",
+    "homeassistant",
+    "hass",
+    "automation",
+    "lovelace",
+    "custom-cards"
+  ],
+  "module": "sprinklers-card.js",
   "type": "module",
   "scripts": {
     "build": "rollup -c rollup.config.js"
