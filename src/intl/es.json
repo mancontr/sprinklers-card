@@ -1,0 +1,11 @@
+{
+  "last-watered": "Último riego",
+  "title": "Riego",
+  "unknown": "Desconocido",
+  "valve.zone": "Zona",
+  "valve.enabled": "Habilitado",
+  "valve.duration": "Duración",
+  "valve.active": "Activo",
+  "valve.last-watered": "Ult. riego",
+  "watering": "Regando"
+}

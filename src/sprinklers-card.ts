@@ -1,4 +1,5 @@
 import { html, css, LitElement } from "lit"
+import L from "./intl"
 import { EntityHistoryEntry, ExtendedHomeAssistant, IdTsMap, SprinklersCardConfig } from "./types"
 
 class SprinklersCard extends LitElement {
@@ -41,6 +42,10 @@ class SprinklersCard extends LitElement {
       .catch(err => {
         console.warn('Sprinklers: could not fetch main switch history:', err)
       })
+  }
+
+  L(key: string): string {
+    return L(this.hass, key)
   }
 
   getSwitchLastOn(ids: string[]): Promise<IdTsMap> {
@@ -94,7 +99,7 @@ class SprinklersCard extends LitElement {
     const mainState = this.hass.states[this.config.general.switch]
     if (!mainState) return html``
 
-    const title = this.config.title || 'Sprinklers'
+    const title = this.config.title || this.L('title')
     const isActive = mainState.state === 'on'
 
     return html`
@@ -124,8 +129,8 @@ class SprinklersCard extends LitElement {
     const current = this.config.valves.find(valve => this.hass.states[valve.switch].state === 'on')
     return html`
       <div class="details-row current">
-        <div class="details-title">Regando</div>
-        <div class="details-value">${current?.name || '(unknown)'}</div>
+        <div class="details-title">${this.L('watering')}</div>
+        <div class="details-value">${current?.name || this.L('unknown')}</div>
       </div>
     `
   }
@@ -135,7 +140,7 @@ class SprinklersCard extends LitElement {
     const lastChange = this.lastOn[sw]
     return html`
       <div class="details-row last-active">
-        <div class="details-title">Último riego</div>
+        <div class="details-title">${this.L('last-watered')}</div>
         <div class="details-value">
           <ha-relative-time .hass=${this.hass} .datetime="${lastChange}" />
         </div>
@@ -144,17 +149,17 @@ class SprinklersCard extends LitElement {
   }
 
   renderModal() {
-    const title = this.config.title || 'Sprinklers'
+    const title = this.config.title || this.L('title')
     return html`
       <ha-dialog open flexContent hideActions .heading=${title} @closed=${this.settingsClosed}>
         <table>
           <thead>
             <tr>
-              <th>${this.config.colTitles?.[0] || 'Valve'}</th>
-              <th>${this.config.colTitles?.[1] || 'Enabled'}</th>
-              <th>${this.config.colTitles?.[2] || 'Duration'}</th>
-              <th>${this.config.colTitles?.[3] || 'Active'}</th>
-              <th>${this.config.colTitles?.[4] || 'Last'}</th>
+              <th>${this.config.colTitles?.[0] || this.L('valve.zone')}</th>
+              <th>${this.config.colTitles?.[1] || this.L('valve.enabled')}</th>
+              <th>${this.config.colTitles?.[2] || this.L('valve.duration')}</th>
+              <th>${this.config.colTitles?.[3] || this.L('valve.active')}</th>
+              <th>${this.config.colTitles?.[4] || this.L('valve.last-watered')}</th>
             </tr>
           </thead>
           <tbody>
