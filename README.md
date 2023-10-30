@@ -2,6 +2,10 @@
 
 A custom card to manage ESPHome's Sprinkler controllers from your Home Assistant.
 
+![Screenshot of the custom card](./docs/screenshot-card.png)
+
+![Screenshot of the settings modal](./docs/screenshot-modal.png)
+
 ## Setup
 
 We recommend using HACS:
@@ -10,11 +14,11 @@ We recommend using HACS:
 
 ## Usage
 
-If you don't have it yet, start by configuring your [Sprinkler Controller](https://esphome.io/components/sprinkler.html) with ESPHome.
+If you haven't done it yet, start by configuring your [Sprinkler Controller](https://esphome.io/components/sprinkler.html) with ESPHome.
 
-To add the card to a panel, add a custom YML card with something like this:
+To add the card to a panel, add a custom YAML card with something like this:
 
-```yaml
+```yml
 type: custom:sprinklers-card
 title: Irrigation
 general:
